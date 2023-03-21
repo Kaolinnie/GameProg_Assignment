@@ -17,6 +17,9 @@ public class PlayerMovement : MonoBehaviour {
     private Animator _animator;
 
     private static readonly int PlayerSpeed = Animator.StringToHash("PlayerSpeed");
+    // private static readonly trigger Jump = Animator.StringToHash("Jump");
+    // private static readonly trigger DoubleJump = Animator.StringToHash("DoubleJump");
+    // private static readonly bool HasDoubleJumped = Animator.StringToHash("HasDoubleJumped");
 
 
     // Start is called before the first frame update
@@ -41,6 +44,7 @@ public class PlayerMovement : MonoBehaviour {
         
         _animator.SetInteger(PlayerSpeed,move.magnitude==0?0:speed);
 
+        Debug.Log(_animator.GetInteger(PlayerSpeed));
         
         
         // Making sure we dont have a Y velocity if we are grounded
@@ -50,6 +54,7 @@ public class PlayerMovement : MonoBehaviour {
         {
             if (Input.GetButtonDown("Jump") )
             {
+                _animator.SetTrigger("Jump");
                 _gravity.y += Mathf.Sqrt(JumpHeight * -3.0f * Gravity);
             }
             else 
